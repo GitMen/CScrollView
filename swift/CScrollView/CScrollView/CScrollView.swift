@@ -7,21 +7,19 @@
 //
 
 import UIKit
-
+//  MARK: CScrollViewDelegate
 @objc protocol CScrollViewDelegate : NSObjectProtocol{
     optional func cscrollViewPageChange(index:Int)
     optional func cscrollViewOnClick(index:Int)
 }
 
-
+//  MARK:
 class CScrollView: UIView , UIScrollViewDelegate{
-    
-    
-    //设置公开变量
-    internal var placeHoderImage:UIImage?
-    internal var csDelegate:CScrollViewDelegate?
-    internal var isImageSubView:Bool?
-    internal var subViews:NSArray{
+    //  设置公开变量
+    internal var placeHoderImage: UIImage?
+    internal var csDelegate: CScrollViewDelegate?
+    internal var isImageSubView: Bool?
+    internal var subViews: NSArray {
         didSet{
             self.isImageSubView = false
             self.configSubViews()
@@ -34,8 +32,6 @@ class CScrollView: UIView , UIScrollViewDelegate{
             self.configImageView()
         }
     }
-    
-    
     
     //设置私有变量
     private var mainView:UIScrollView?
@@ -67,8 +63,8 @@ class CScrollView: UIView , UIScrollViewDelegate{
     internal func openLongPanStopRolling(panTime:NSTimeInterval){
         
         for var i = 0 ; i < self.mViews?.count ; i++ {
-            var imageView : UIImageView =  self.mViews!.objectAtIndex(i) as UIImageView
-            var longPan:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPan:");
+            let imageView : UIImageView =  self.mViews!.objectAtIndex(i) as! UIImageView
+            let longPan:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPan:");
             longPan.minimumPressDuration = panTime;
             imageView.addGestureRecognizer(longPan)
         }
@@ -84,7 +80,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
         self.mainView?.userInteractionEnabled = false;
         //固定向右滚动
         UIView.animateWithDuration(2, animations: { () -> Void in
-            var frame:CGFloat = self.mainView!.contentOffset.x + self.mainView!.frame.size.width;
+            let frame:CGFloat = self.mainView!.contentOffset.x + self.mainView!.frame.size.width;
             self.mainView?.contentOffset = CGPointMake(frame, 0);
             }) { (Bool isOk) -> Void in
                 self.scrollViewDidEndDecelerating(self.mainView!);
@@ -102,7 +98,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
         self.addSubview(self.mainView!)
         
         for index in 0...2{
-            var imageView:UIImageView = self.createImageView(index)
+            let imageView:UIImageView = self.createImageView(index)
             switch index{
             case 0:
                 self.pageViewLeft = imageView
@@ -121,7 +117,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
     
     //MARK: 创建内容试图
     private func createImageView(index:Int)->UIImageView{
-        var imageView:UIImageView = UIImageView(frame: CGRectMake(CGFloat(index) * (self.frame.size.width + CGFloat(5)), 0, self.frame.size.width, self.frame.size.height))
+        let imageView:UIImageView = UIImageView(frame: CGRectMake(CGFloat(index) * (self.frame.size.width + CGFloat(5)), 0, self.frame.size.width, self.frame.size.height))
         imageView.layer.masksToBounds = true
         imageView.userInteractionEnabled = true;
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction:"));
@@ -143,8 +139,8 @@ class CScrollView: UIView , UIScrollViewDelegate{
     }
     
     func tapAction(tap:UITapGestureRecognizer){
-        var imageView:UIImageView = tap.view as UIImageView;
-        var tag:Int = imageView.tag;
+        let imageView:UIImageView = tap.view as! UIImageView;
+        let tag:Int = imageView.tag;
         self.csDelegate?.cscrollViewOnClick!(tag);
     }
     
@@ -152,16 +148,16 @@ class CScrollView: UIView , UIScrollViewDelegate{
     //MARK: 配置图片
     private func configImageView(){
         //判断个数
-        self.pageViewCenter?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(0) as NSString), placeholderImage: placeHoderImage)
+        self.pageViewCenter?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(0) as! String)!, placeholderImage: placeHoderImage)
         self.mainView?.userInteractionEnabled = true
         if self.imagesUrls.count == 1{
             self.mainView?.userInteractionEnabled = false
         }else if self.imagesUrls.count == 2{
-            self.pageViewLeft?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
-            self.pageViewRight?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
         }else{
-            self.pageViewLeft?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(self.imagesUrls.count-1) as NSString), placeholderImage: placeHoderImage)
-            self.pageViewRight?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(self.imagesUrls.count-1) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
         }
     }
     //MARK: 配置子试图
@@ -261,24 +257,24 @@ class CScrollView: UIView , UIScrollViewDelegate{
         self.pageViewCenter?.frame = CGRectMake(x, y, width, height)
     }
     private func set_frame_Left(){
-        var x:CGFloat = 0
-        var y:CGFloat = 0
-        var width =  self.pageViewLeft!.frame.size.width
-        var height =  self.pageViewLeft!.frame.size.height
+        let x:CGFloat = 0
+        let y:CGFloat = 0
+        let width =  self.pageViewLeft!.frame.size.width
+        let height =  self.pageViewLeft!.frame.size.height
         self.pageViewLeft?.frame = CGRectMake(x, y, width, height)
     }
     private func set_frame_Right(){
-        var x:CGFloat = self.mainView!.frame.size.width * 2
-        var y:CGFloat = 0
-        var width =  self.pageViewRight!.frame.size.width
-        var height =  self.pageViewRight!.frame.size.height
+        let x:CGFloat = self.mainView!.frame.size.width * 2
+        let y:CGFloat = 0
+        let width =  self.pageViewRight!.frame.size.width
+        let height =  self.pageViewRight!.frame.size.height
         self.pageViewRight?.frame = CGRectMake(x, y, width, height)
     }
     
     //MARK: 滚动试图代理
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        var pageWidth:CGFloat = scrollView.frame.size.width
-        var page:Int = Int(scrollView.contentOffset.x / pageWidth)
+        let pageWidth:CGFloat = scrollView.frame.size.width
+        let page:Int = Int(scrollView.contentOffset.x / pageWidth)
         if page == 1{
             //保持在中间不需要移动
             return
