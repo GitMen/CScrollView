@@ -20,13 +20,13 @@ class CScrollView: UIView , UIScrollViewDelegate{
     internal var csDelegate: CScrollViewDelegate?
     internal var isImageSubView: Bool?
     internal var subViews: NSArray {
-        didSet{
+        didSet {
             self.isImageSubView = false
             self.configSubViews()
         }
     }
-    internal var imagesUrls:NSArray{
-        didSet{
+    internal var imagesUrls: NSArray {
+        didSet {
             //监听imageUrl赋值方法
             self.isImageSubView = true
             self.configImageView()
@@ -34,12 +34,12 @@ class CScrollView: UIView , UIScrollViewDelegate{
     }
     
     //设置私有变量
-    private var mainView:UIScrollView?
-    private var mViews:NSMutableArray?
-    private var pageViewLeft:UIImageView?
-    private var pageViewCenter:UIImageView?
-    private var pageViewRight:UIImageView?
-    private var isStopRoll:Bool?
+    private var mainView: UIScrollView?
+    private var mViews: NSMutableArray?
+    private var pageViewLeft: UIImageView?
+    private var pageViewCenter: UIImageView?
+    private var pageViewRight: UIImageView?
+    private var isStopRoll: Bool?
     
     override init(frame: CGRect) {
         self.mViews = NSMutableArray(capacity: 42)
@@ -54,12 +54,12 @@ class CScrollView: UIView , UIScrollViewDelegate{
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: 开启自动滚动
+    //  MARK: 开启自动滚动
     internal func openAutomaticRolling(){
         //设置定时器
         NSTimer.scheduledTimerWithTimeInterval(4, target: self, selector: "automaticRolling", userInfo: nil, repeats: true);
     }
-    //MARK: 开启长按停止自动滚动
+    //  MARK: 开启长按停止自动滚动
     internal func openLongPanStopRolling(panTime:NSTimeInterval){
         
         for var i = 0 ; i < self.mViews?.count ; i++ {
@@ -71,7 +71,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
         
     }
     
-    //MARK: 自动滚动
+    //  MARK: 自动滚动
     func automaticRolling(){
         if self.isStopRoll == true{
             return;
@@ -111,11 +111,11 @@ class CScrollView: UIView , UIScrollViewDelegate{
             }
         }
         self.pageViewCenter?.tag = 0
-        //将滚动试图移动到中心
+        //  将滚动试图移动到中心
         self.mainView?.contentOffset = CGPointMake(self.mainView!.frame.size.width, 0)
     }
     
-    //MARK: 创建内容试图
+    //  MARK: 创建内容试图
     private func createImageView(index:Int)->UIImageView{
         let imageView:UIImageView = UIImageView(frame: CGRectMake(CGFloat(index) * (self.frame.size.width + CGFloat(5)), 0, self.frame.size.width, self.frame.size.height))
         imageView.layer.masksToBounds = true
@@ -126,7 +126,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
         return imageView
     }
     
-    //MARK: ACTION
+    //  MARK: ACTION
     func longPan(longPree:UILongPressGestureRecognizer){
         switch longPree.state{
         case UIGestureRecognizerState.Began:
@@ -145,7 +145,7 @@ class CScrollView: UIView , UIScrollViewDelegate{
     }
     
     
-    //MARK: 配置图片
+    //  MARK: 配置图片
     private func configImageView(){
         //判断个数
         self.pageViewCenter?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(0) as! String)!, placeholderImage: placeHoderImage)
@@ -154,25 +154,25 @@ class CScrollView: UIView , UIScrollViewDelegate{
             self.mainView?.userInteractionEnabled = false
         }else if self.imagesUrls.count == 2{
             self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
-            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
         }else{
-            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(self.imagesUrls.count-1) as NSString), placeholderImage: placeHoderImage)
-            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(self.imagesUrls.count - 1) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
         }
     }
     //MARK: 配置子试图
     private func configSubViews(){
-        self.pageViewCenter!.addSubview(self.subViews.firstObject! as UIView)
-        self.pageViewLeft!.addSubview(self.subViews.lastObject as UIView)
-        self.pageViewRight!.addSubview(self.subViews.objectAtIndex(1) as UIView)
+        self.pageViewCenter!.addSubview(self.subViews.firstObject as! UIView)
+        self.pageViewLeft!.addSubview(self.subViews.lastObject as! UIView)
+        self.pageViewRight!.addSubview(self.subViews.objectAtIndex(1) as! UIView)
     }
     
     //MARK: 移动试图向左
     private func allArticlesMoveLeft(pageWidth:CGFloat){
         
-        var lastCenterTag:Int = self.pageViewCenter!.tag
+        let lastCenterTag:Int = self.pageViewCenter!.tag
         
-        var tempView:UIImageView = self.pageViewLeft!
+        let tempView:UIImageView = self.pageViewLeft!
         self.pageViewLeft = self.pageViewCenter
         self.pageViewCenter = self.pageViewRight
         self.pageViewRight = tempView
@@ -198,12 +198,12 @@ class CScrollView: UIView , UIScrollViewDelegate{
             if nextTag == self.subViews.count{
                 nextTag = 0
             }
-            self.pageViewRight!.addSubview(self.subViews.objectAtIndex(nextTag) as UIView)
+            self.pageViewRight!.addSubview(self.subViews.objectAtIndex(nextTag) as! UIView)
         }else{
             if nextTag == self.imagesUrls.count{
                 nextTag = 0
             }
-            self.pageViewRight?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as! String)!, placeholderImage: placeHoderImage)
         }
         
         
@@ -211,9 +211,9 @@ class CScrollView: UIView , UIScrollViewDelegate{
     //MARK: 移动试图向右
     private func allArticlesMoveRight(pageWidth:CGFloat){
         
-        var lastCenterTag:Int = self.pageViewCenter!.tag
+        let lastCenterTag:Int = self.pageViewCenter!.tag
         
-        var tempView:UIImageView = self.pageViewRight!
+        let tempView:UIImageView = self.pageViewRight!
         self.pageViewRight = self.pageViewCenter
         self.pageViewCenter = self.pageViewLeft
         self.pageViewLeft = tempView
@@ -239,21 +239,21 @@ class CScrollView: UIView , UIScrollViewDelegate{
             if nextTag < 0{
                 nextTag = self.subViews.count - 1
             }
-            self.pageViewLeft!.addSubview(self.subViews.objectAtIndex(nextTag) as UIView)
+            self.pageViewLeft!.addSubview(self.subViews.objectAtIndex(nextTag) as! UIView)
         }else{
             if nextTag < 0{
                 nextTag = self.imagesUrls.count - 1
             }
-            self.pageViewLeft?.setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as NSString), placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as! String)!, placeholderImage: placeHoderImage)
         }
         
     }
     //MARK: 重新设置试图位置
     private func set_frame_center(){
-        var x:CGFloat = self.mainView!.frame.size.width
-        var y:CGFloat = 0
-        var width =  self.pageViewCenter!.frame.size.width
-        var height =  self.pageViewCenter!.frame.size.height
+        let x:CGFloat = self.mainView!.frame.size.width
+        let y:CGFloat = 0
+        let width =  self.pageViewCenter!.frame.size.width
+        let height =  self.pageViewCenter!.frame.size.height
         self.pageViewCenter?.frame = CGRectMake(x, y, width, height)
     }
     private func set_frame_Left(){

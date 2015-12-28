@@ -21,11 +21,11 @@ class ViewController: UIViewController , CScrollViewDelegate{
 
     }
     func webPageUrls(){
-        var viewY:CGFloat = (UIScreen.mainScreen().bounds.size.height - 250)/2
-        var sView:CScrollView = CScrollView(frame: CGRectMake(0, viewY , UIScreen.mainScreen().bounds.size.width, 250))
+        let viewY:CGFloat = (UIScreen.mainScreen().bounds.size.height - 250)/2
+        let sView:CScrollView = CScrollView(frame: CGRectMake(0, viewY , UIScreen.mainScreen().bounds.size.width, 250))
         
         
-        var imageUrls:NSMutableArray = NSMutableArray(capacity: 42)
+        let imageUrls:NSMutableArray = NSMutableArray(capacity: 42)
         imageUrls.addObject("http://img4.duitang.com/uploads/item/201407/13/20140713095140_LusMk.thumb.700_0.jpeg")
         imageUrls.addObject("http://img4.duitang.com/uploads/item/201407/06/20140706090107_H3Tyd.jpeg")
         imageUrls.addObject("http://img4q.duitang.com/uploads/item/201407/21/20140721143254_reBYa.jpeg")
@@ -42,19 +42,19 @@ class ViewController: UIViewController , CScrollViewDelegate{
     }
     
     func customerViews(){
-        var viewY:CGFloat = (UIScreen.mainScreen().bounds.size.height - 250)/2
-        var sView:CScrollView = CScrollView(frame: CGRectMake(0, viewY , UIScreen.mainScreen().bounds.size.width, 250))
+        let viewY:CGFloat = (UIScreen.mainScreen().bounds.size.height - 250)/2
+        let sView:CScrollView = CScrollView(frame: CGRectMake(0, viewY , UIScreen.mainScreen().bounds.size.width, 250))
         
         
-        var view1:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
-        var view2:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
-        var view3:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
-        var view4:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
+        let view1:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
+        let view2:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
+        let view3:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
+        let view4:UIImageView = UIImageView(frame: CGRectMake(0, 0, sView.frame.size.width , 250))
         view1.image = UIImage(named: "1.jpg")
         view2.image = UIImage(named: "2.jpg")
         view3.image = UIImage(named: "3.jpg")
         view4.image = UIImage(named: "4.jpg")
-        var subViews:NSMutableArray = NSMutableArray(capacity: 42)
+        let subViews:NSMutableArray = NSMutableArray(capacity: 42)
         subViews.addObject(view1)
         subViews.addObject(view2)
         subViews.addObject(view3)
