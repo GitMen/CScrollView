@@ -20,7 +20,7 @@ class CScrollView: UIView {
     internal var placeHoderImage: UIImage?
     internal var csDelegate: CScrollViewDelegate?
     internal var isImageSubView: Bool?
-    internal var subViews: NSArray {
+    internal var subViews: [UIView] {
         didSet {
             self.isImageSubView = false
             self.configSubViews()
@@ -45,7 +45,7 @@ class CScrollView: UIView {
     override init(frame: CGRect) {
         self.mViews = NSMutableArray(capacity: 42)
         self.imagesUrls = []
-        self.subViews = NSArray()
+        self.subViews = []
         super.init(frame: frame)
         //创建主试图
         self.createMainView()
@@ -160,9 +160,11 @@ class CScrollView: UIView {
     }
     //  MARK: 配置子试图
     private func configSubViews() {
-        self.pageViewCenter!.addSubview(self.subViews.firstObject as! UIView)
-        self.pageViewLeft!.addSubview(self.subViews.lastObject as! UIView)
-        self.pageViewRight!.addSubview(self.subViews.objectAtIndex(1) as! UIView)
+        let first = subViews.startIndex
+        let last = subViews.endIndex - 1
+        self.pageViewCenter!.addSubview(self.subViews[first])
+        self.pageViewLeft!.addSubview(self.subViews[last])
+        self.pageViewRight!.addSubview(self.subViews[1])
     }
     
     //  MARK: 移动试图向左
@@ -195,7 +197,7 @@ class CScrollView: UIView {
             if nextTag == self.subViews.count {
                 nextTag = 0
             }
-            self.pageViewRight!.addSubview(self.subViews.objectAtIndex(nextTag) as! UIView)
+            self.pageViewRight!.addSubview(self.subViews[nextTag])
         } else {
             if nextTag == self.imagesUrls.count {
                 nextTag = 0
@@ -235,7 +237,7 @@ class CScrollView: UIView {
             if nextTag < 0 {
                 nextTag = self.subViews.count - 1
             }
-            self.pageViewLeft!.addSubview(self.subViews.objectAtIndex(nextTag) as! UIView)
+            self.pageViewLeft!.addSubview(self.subViews[nextTag])
         } else {
             if nextTag < 0 {
                 nextTag = self.imagesUrls.count - 1

@@ -55,11 +55,11 @@ class ViewController: UIViewController {
         view2.image = UIImage(named: "2.jpg")
         view3.image = UIImage(named: "3.jpg")
         view4.image = UIImage(named: "4.jpg")
-        let subViews: NSMutableArray = NSMutableArray(capacity: 42)
-        subViews.addObject(view1)
-        subViews.addObject(view2)
-        subViews.addObject(view3)
-        subViews.addObject(view4)
+        var subViews: [UIView] = []
+        subViews.append(view1)
+        subViews.append(view2)
+        subViews.append(view3)
+        subViews.append(view4)
         
         //  通过自定义试图展示
         sView.subViews = subViews
