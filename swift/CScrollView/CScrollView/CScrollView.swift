@@ -26,7 +26,7 @@ class CScrollView: UIView {
             self.configSubViews()
         }
     }
-    internal var imagesUrls: NSArray {
+    internal var imagesUrls: [String] {
         didSet {
             //监听imageUrl赋值方法
             self.isImageSubView = true
@@ -44,7 +44,7 @@ class CScrollView: UIView {
     
     override init(frame: CGRect) {
         self.mViews = NSMutableArray(capacity: 42)
-        self.imagesUrls = NSArray()
+        self.imagesUrls = []
         self.subViews = NSArray()
         super.init(frame: frame)
         //创建主试图
@@ -146,16 +146,16 @@ class CScrollView: UIView {
     //  MARK: 配置图片
     private func configImageView() {
         //  判断个数
-        self.pageViewCenter?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(0) as! String)!, placeholderImage: placeHoderImage)
+        self.pageViewCenter?.kf_setImageWithURL(NSURL(string: self.imagesUrls[0])!, placeholderImage: placeHoderImage)
         self.mainView?.userInteractionEnabled = true
         if self.imagesUrls.count == 1 {
             self.mainView?.userInteractionEnabled = false
         } else if self.imagesUrls.count == 2 {
-            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
-            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls[1])!, placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls[1])!, placeholderImage: placeHoderImage)
         } else {
-            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(self.imagesUrls.count - 1) as! String)!, placeholderImage: placeHoderImage)
-            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(1) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls[self.imagesUrls.count - 1])!, placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls[1])!, placeholderImage: placeHoderImage)
         }
     }
     //  MARK: 配置子试图
@@ -200,7 +200,7 @@ class CScrollView: UIView {
             if nextTag == self.imagesUrls.count {
                 nextTag = 0
             }
-            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewRight?.kf_setImageWithURL(NSURL(string: self.imagesUrls[nextTag])!, placeholderImage: placeHoderImage)
         }
     }
     
@@ -240,7 +240,7 @@ class CScrollView: UIView {
             if nextTag < 0 {
                 nextTag = self.imagesUrls.count - 1
             }
-            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls.objectAtIndex(nextTag) as! String)!, placeholderImage: placeHoderImage)
+            self.pageViewLeft?.kf_setImageWithURL(NSURL(string: self.imagesUrls[nextTag])!, placeholderImage: placeHoderImage)
         }
         
     }
