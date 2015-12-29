@@ -69,7 +69,6 @@
 		C12DEC641AD8BD4E00710957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C12DEC651AD8BD4E00710957 /* CScrollViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CScrollViewTests.swift; sourceTree = "<group>"; };
 		C12DEC6F1AD8BD6000710957 /* CScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CScrollView.swift; sourceTree = "<group>"; };
-		C12DEC711AD8BDC000710957 /* CScrollView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CScrollView-Bridging-Header.h"; sourceTree = "<group>"; };
 		C12DECA11AD8C83400710957 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		C12DECA21AD8C83400710957 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		C12DECA31AD8C83400710957 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 				C12DEC4C1AD8BD4E00710957 /* CScrollView */,
 				C12DEC621AD8BD4E00710957 /* CScrollViewTests */,
 				C12DEC4B1AD8BD4E00710957 /* Products */,
-				C12DEC711AD8BDC000710957 /* CScrollView-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};

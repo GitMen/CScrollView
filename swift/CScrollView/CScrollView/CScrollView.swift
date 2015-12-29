@@ -14,12 +14,16 @@ import UIKit
     optional func cscrollViewOnClick(index:Int)
 }
 
+private let ScreenWidth = UIScreen.mainScreen().bounds.width
+private let ScreenHeight = UIScreen.mainScreen().bounds.height
+
 //  MARK:
 class CScrollView: UIView {
     //  设置公开变量
     internal var placeHoderImage: UIImage?
     internal var csDelegate: CScrollViewDelegate?
     internal var isImageSubView: Bool?
+    internal var imageViewContentMode: UIViewContentMode = .ScaleAspectFit
     internal var subViews: [UIView] {
         didSet {
             self.isImageSubView = false
@@ -34,16 +38,16 @@ class CScrollView: UIView {
         }
     }
     
-    //设置私有变量
+    //  设置私有变量
     private var mainView: UIScrollView?
-    private var mViews: NSMutableArray?
+    private var mViews: [UIImageView]?
     private var pageViewLeft: UIImageView?
     private var pageViewCenter: UIImageView?
     private var pageViewRight: UIImageView?
     private var isStopRoll: Bool?
     
     override init(frame: CGRect) {
-        self.mViews = NSMutableArray(capacity: 42)
+        self.mViews = []
         self.imagesUrls = []
         self.subViews = []
         super.init(frame: frame)
@@ -52,7 +56,12 @@ class CScrollView: UIView {
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.mViews = []
+        self.imagesUrls = []
+        self.subViews = []
+        super.init(coder: aDecoder)!
+        //创建主试图
+        self.createMainView()
     }
     
     //  MARK: 开启自动滚动
@@ -63,7 +72,7 @@ class CScrollView: UIView {
     //  MARK: 开启长按停止自动滚动
     internal func openLongPanStopRolling(panTime:NSTimeInterval) {
         for var i = 0; i < self.mViews?.count; i++ {
-            let imageView : UIImageView =  self.mViews!.objectAtIndex(i) as! UIImageView
+            let imageView: UIImageView = self.mViews![i]
             let longPan:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPan:")
             longPan.minimumPressDuration = panTime
             imageView.addGestureRecognizer(longPan)
@@ -89,15 +98,15 @@ class CScrollView: UIView {
     
     //  MARK: 创建主试图
     private func createMainView() {
-        self.mainView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width + 5, height: self.frame.size.height))
+        self.mainView = UIScrollView(frame: CGRect(x: 0, y: 0, width: ScreenWidth + 5, height: ScreenHeight))
         self.mainView?.delegate = self
         self.mainView?.pagingEnabled = true
         self.mainView?.showsHorizontalScrollIndicator = false
-        self.mainView?.contentSize = CGSize(width: self.frame.size.width * CGFloat(3) + CGFloat(5) * CGFloat(3) , height: self.frame.size.height)
+        self.mainView?.contentSize = CGSize(width: ScreenWidth * CGFloat(3) + CGFloat(5) * CGFloat(3), height: ScreenHeight)
         self.addSubview(self.mainView!)
         
         for index in 0...2 {
-            let imageView:UIImageView = self.createImageView(index)
+            let imageView: UIImageView = self.createImageView(index)
             switch index{
             case 0:
                 self.pageViewLeft = imageView
@@ -116,12 +125,13 @@ class CScrollView: UIView {
     
     //  MARK: 创建内容试图
     private func createImageView(index: Int) -> UIImageView {
-        let imageView:UIImageView = UIImageView(frame: CGRect(x: CGFloat(index) * (self.frame.size.width + CGFloat(5)),y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        let imageView: UIImageView = UIImageView(frame: CGRect(x: CGFloat(index) * (ScreenWidth + CGFloat(5)),y: 0, width: ScreenWidth, height: ScreenHeight))
         imageView.layer.masksToBounds = true
         imageView.userInteractionEnabled = true;
+        imageView.contentMode = imageViewContentMode
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction:"));
         self.mainView?.addSubview(imageView)
-        mViews?.addObject(imageView)
+        mViews?.append(imageView)
         return imageView
     }
     
@@ -176,7 +186,7 @@ class CScrollView: UIView {
         self.pageViewLeft = self.pageViewCenter
         self.pageViewCenter = self.pageViewRight
         self.pageViewRight = tempView
-
+        
         var count = 0;
         if self.isImageSubView! {
             count = self.imagesUrls.count - 1
