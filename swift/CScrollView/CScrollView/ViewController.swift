@@ -11,67 +11,61 @@ import UIKit
 private let ImageViewHeight: CGFloat = 250.0
 
 class ViewController: UIViewController {
-
+    //  MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.brownColor()
+        view.backgroundColor = UIColor.brownColor()
         
         //  两种不同展示形式，可切换使用
-//        self.webPageUrls()
-        self.customerViews()
-
+//        webPageUrls()
+        customerViews()
     }
     
-    func webPageUrls() {
+    //  MARK: Load images
+    //  images form web
+    private func webPageUrls() {
         let viewY: CGFloat = (UIScreen.mainScreen().bounds.height - ImageViewHeight) / 2
-        let sView: CScrollView = CScrollView(frame: CGRect(x: 0, y: viewY , width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
+        let sView = CScrollView(frame: CGRect(x: 0, y: viewY , width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
         
-        
-        var imageUrls: [String] = []
-        imageUrls.append("http://img4.duitang.com/uploads/item/201407/13/20140713095140_LusMk.thumb.700_0.jpeg")
-        imageUrls.append("http://img4.duitang.com/uploads/item/201407/06/20140706090107_H3Tyd.jpeg")
-        imageUrls.append("http://img4q.duitang.com/uploads/item/201407/21/20140721143254_reBYa.jpeg")
-        imageUrls.append("http://i2.img.969g.com/pcgame/imgx2015/03/24/289_143056_7f39a_lit.jpg")
+        let imageUrls = [
+            "http://img4.duitang.com/uploads/item/201407/13/20140713095140_LusMk.thumb.700_0.jpeg",
+            "http://img4.duitang.com/uploads/item/201407/06/20140706090107_H3Tyd.jpeg",
+            "http://img4q.duitang.com/uploads/item/201407/21/20140721143254_reBYa.jpeg",
+            "http://i2.img.969g.com/pcgame/imgx2015/03/24/289_143056_7f39a_lit.jpg"
+        ]
 
         sView.imagesUrls = imageUrls
         
         //  打开自动滚动
-        sView.openAutomaticRolling()
+        sView.openAutomaticRolling(interval: 2)
         //  打开长按停止自动滚动
-        sView.openLongPanStopRolling(1)
+        sView.openLongPanStopRolling(panTime: 1)
         sView.csDelegate = self
-        self.view.addSubview(sView)
+        view.addSubview(sView)
     }
     
-    func customerViews() {
-        let viewY: CGFloat = (UIScreen.mainScreen().bounds.size.height - ImageViewHeight) / 2
-        let sView: CScrollView = CScrollView(frame: CGRect(x: 0, y: viewY, width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
+    //  images from local
+    private func customerViews() {
+        let viewY: CGFloat = (UIScreen.mainScreen().bounds.height - ImageViewHeight) / 2
+        let sView = CScrollView(frame: CGRect(x: 0, y: viewY, width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
         
-        let view1:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
-        let view2:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
-        let view3:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
-        let view4:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
-        
-        view1.image = UIImage(named: "1.jpg")
-        view2.image = UIImage(named: "2.jpg")
-        view3.image = UIImage(named: "3.jpg")
-        view4.image = UIImage(named: "4.jpg")
-        
+        let imageNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
         var subViews: [UIView] = []
-        subViews.append(view1)
-        subViews.append(view2)
-        subViews.append(view3)
-        subViews.append(view4)
+        for i in 0 ..< imageNames.count {
+            let view = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
+            view.image = UIImage(named: imageNames[i])
+            subViews.append(view)
+        }
         
         //  通过自定义试图展示
         sView.subViews = subViews
         
         //  打开自动滚动
-        sView.openAutomaticRolling()
+        sView.openAutomaticRolling(interval: 4)
         //  打开长按停止自动滚动
-        sView.openLongPanStopRolling(1)
+        sView.openLongPanStopRolling(panTime: 1)
         sView.csDelegate = self
-        self.view.addSubview(sView)
+        view.addSubview(sView)
     }
 }
 
