@@ -260,6 +260,7 @@
 		C12DECE81AD8CB4700710957 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "四海道达网络科技有限公司";
 				TargetAttributes = {
@@ -533,6 +534,7 @@
 				C12DED151AD8CB4700710957 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C12DED161AD8CB4700710957 /* Build configuration list for PBXNativeTarget "CScrollViewTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +543,7 @@
 				C12DED181AD8CB4700710957 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

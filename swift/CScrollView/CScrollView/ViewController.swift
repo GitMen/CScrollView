@@ -51,10 +51,12 @@ class ViewController: UIViewController {
         let view2:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
         let view3:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
         let view4:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: sView.frame.size.width, height: ImageViewHeight))
+        
         view1.image = UIImage(named: "1.jpg")
         view2.image = UIImage(named: "2.jpg")
         view3.image = UIImage(named: "3.jpg")
         view4.image = UIImage(named: "4.jpg")
+        
         var subViews: [UIView] = []
         subViews.append(view1)
         subViews.append(view2)
