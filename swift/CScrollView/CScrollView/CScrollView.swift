@@ -10,7 +10,18 @@ import UIKit
 
 //  MARK: CScrollViewDelegate
 @objc protocol CScrollViewDelegate: NSObjectProtocol {
+    /**
+     CScrollView 滑动到某个页面时的代理方法
+     
+     - parameter index: 页面索引值
+     */
     optional func cscrollViewPageChange(index: Int)
+    
+    /**
+     点击 CScrollView 某个页面时的代理方法
+     
+     - parameter index: 页面索引值
+     */
     optional func cscrollViewOnClick(index: Int)
 }
 
@@ -53,7 +64,7 @@ class CScrollView: UIView {
         self.subViews = []
         super.init(frame: frame)
         //  创建主试图
-        self.createMainView()
+        createMainView()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -62,7 +73,7 @@ class CScrollView: UIView {
         self.subViews = []
         super.init(coder: aDecoder)!
         //  创建主试图
-        self.createMainView()
+        createMainView()
     }
     
     //  MARK: ===== internal methods =====

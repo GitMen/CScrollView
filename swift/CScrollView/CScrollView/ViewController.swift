@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     //  MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.brownColor()
+        view.backgroundColor = UIColor.blackColor()
         
         //  两种不同展示形式，可切换使用
 //        webPageUrls()
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         sView.imagesUrls = imageUrls
         
         //  打开自动滚动
-        sView.openAutomaticRolling(interval: 2)
+        sView.openAutomaticRolling(interval: 4)
         //  打开长按停止自动滚动
         sView.openLongPanStopRolling(panTime: 1)
         sView.csDelegate = self
@@ -73,7 +73,6 @@ class ViewController: UIViewController {
 extension ViewController: CScrollViewDelegate {
     //  MARK: 被点击时调用
     func cscrollViewOnClick(index: Int) {
-        
         print("\(index)页面被点击了")
     }
     
