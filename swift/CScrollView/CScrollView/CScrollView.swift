@@ -85,7 +85,7 @@ class CScrollView: UIView {
     */
     func openAutomaticRolling(interval time: NSTimeInterval) {
         //  设置定时器
-        NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: "automaticRolling", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(time, target: self, selector: #selector(CScrollView.automaticRolling), userInfo: nil, repeats: true)
     }
     
     //  MARK: 开启长按停止自动滚动
@@ -100,7 +100,7 @@ class CScrollView: UIView {
         }
         for i in 0 ..< mViews.count {
             let imageView: UIImageView = mViews[i]
-            let longPan = UILongPressGestureRecognizer(target: self, action: "longPan:")
+            let longPan = UILongPressGestureRecognizer(target: self, action: #selector(CScrollView.longPan(_:)))
             longPan.minimumPressDuration = time
             imageView.addGestureRecognizer(longPan)
         }
@@ -143,7 +143,7 @@ class CScrollView: UIView {
         imageView.layer.masksToBounds = true
         imageView.userInteractionEnabled = true;
         imageView.contentMode = imageViewContentMode
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapAction:"));
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CScrollView.tapAction(_:))));
         mainView?.addSubview(imageView)
         mViews?.append(imageView)
         return imageView
@@ -160,7 +160,7 @@ class CScrollView: UIView {
         UIView.animateWithDuration(2, animations: { () -> Void in
             let frame: CGFloat = self.mainView!.contentOffset.x + self.mainView!.frame.size.width
             self.mainView?.contentOffset = CGPoint(x: frame, y: 0)
-            }) { (Bool isOk) -> Void in
+            }) { (isOk) -> Void in
                 self.scrollViewDidEndDecelerating(self.mainView!);
                 self.mainView?.userInteractionEnabled = true;
         }
