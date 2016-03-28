@@ -9,7 +9,7 @@
 import UIKit
 
 //  MARK: CScrollViewDelegate
-@objc protocol CScrollViewDelegate: NSObjectProtocol {
+@objc protocol CScrollViewDelegate {
     /**
      CScrollView 滑动到某个页面时的代理方法
      
@@ -200,6 +200,7 @@ class CScrollView: UIView {
             pageViewRight?.kf_setImageWithURL(NSURL(string: imagesUrls[1])!, placeholderImage: placeHoderImage)
         }
     }
+    
     //  MARK: 配置子试图
     private func configSubViews() {
         let first = subViews.startIndex
