@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     //  MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.black
         
         //  两种不同展示形式，可切换使用
 //        webPageUrls()
@@ -24,8 +24,8 @@ class ViewController: UIViewController {
     //  MARK: Load images
     //  images form web
     private func webPageUrls() {
-        let viewY: CGFloat = (UIScreen.mainScreen().bounds.height - ImageViewHeight) / 2
-        let sView = CScrollView(frame: CGRect(x: 0, y: viewY , width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
+        let viewY: CGFloat = (UIScreen.main.bounds.height - ImageViewHeight) / 2
+        let sView = CScrollView(frame: CGRect(x: 0, y: viewY , width: UIScreen.main.bounds.width, height: ImageViewHeight))
         
         let imageUrls = [
             "http://img4.duitang.com/uploads/item/201407/13/20140713095140_LusMk.thumb.700_0.jpeg",
@@ -46,8 +46,8 @@ class ViewController: UIViewController {
     
     //  images from local
     private func customerViews() {
-        let viewY: CGFloat = (UIScreen.mainScreen().bounds.height - ImageViewHeight) / 2
-        let sView = CScrollView(frame: CGRect(x: 0, y: viewY, width: UIScreen.mainScreen().bounds.width, height: ImageViewHeight))
+        let viewY: CGFloat = (UIScreen.main.bounds.height - ImageViewHeight) / 2
+        let sView = CScrollView(frame: CGRect(x: 0, y: viewY, width: UIScreen.main.bounds.width, height: ImageViewHeight))
         
         let imageNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"]
         var subViews: [UIView] = []
@@ -72,12 +72,12 @@ class ViewController: UIViewController {
 //  MARK: - CScrollViewDelegate
 extension ViewController: CScrollViewDelegate {
     //  MARK: 被点击时调用
-    func cscrollViewOnClick(index: Int) {
+    func cscrollViewOnClick(at index: Int) {
         print("\(index)页面被点击了")
     }
     
     //  MARK: 滚动到某页
-    func cscrollViewPageChange(index: Int) {
+    func cscrollViewPageChange(at index: Int) {
         print("当前在\(index)页面")
     }
 }
