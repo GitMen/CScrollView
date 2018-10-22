@@ -1,0 +1,168 @@
+
+/*全局*/
+body{
+    width: 100%;
+    height: 100%;
+}
+.wrap{
+    padding:15px;
+    position: relative;
+}
+/*评论建议*/
+.wrap textarea{
+    width: 100%;
+    border: 1px solid #c9c9c9;
+    min-height:100px;
+    background: #fff;
+    font-size: 16px;
+    border-radius: 3px;
+    padding:15px;
+}
+.wrap button{
+    width: 100%;
+    height: 45px;
+    background: #00a0e9;
+    left: 45px;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 6px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+/*预约个人*/
+.select_btn{
+    height: 45px;
+    line-height: 45px;
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    width: 100%;
+}
+
+.select_btn button{
+    width: 50%;
+    text-align: center;
+    font-size: 15px;
+    background: #fff;
+    color: #b5b5b5;
+    height: 45px;
+}
+.select_btn .bussiness_btn{
+    background: #00a0e9;
+    color: #fff;
+}
+.wrap input{
+    height: 47px;
+    background: #fff;
+    border: 1px solid #bbbbbb;
+    width: 100%;
+    font-size: 18px;
+    padding-left: 15px;
+    border-radius: 6px;
+    margin-top:15px;
+}
+.wrap #name{
+    border-radius: 6px 6px 0 0;
+    border-bottom: none;
+}
+.wrap #number{
+    border-radius: 0 0 6px 6px ;
+    margin-top:0px;
+
+}
+/*预约进度*/
+.meg_num{
+    height: 45px;
+    line-height: 45px;
+    padding-left: 15px;
+
+}
+.status{
+    height: 20px;
+    line-height: 20px;
+    background: #ebebeb;
+    width: 100%;
+    color: #fff;
+    font-size: 15px;
+    padding-left: 15px;
+}
+.status1{
+    background: url(../images/status1.png) no-repeat -100px center;
+}
+.status2{
+    background: url(../images/status2.png) no-repeat -50px center;
+}
+.status3{
+    background: url(../images/status3.png) no-repeat -160px center;
+}
+.status4{
+    background: url(../images/status4.png) no-repeat -100px center;
+}
+.content{
+    padding: 5px 15px;
+    background: #fff;
+}
+.content li{
+    height: 28px;
+    line-height: 28px;
+}
+.content span{
+    font-size: 15px;
+    color: #666;
+    font-weight: 100;
+    text-align: right;
+}
+.content .txt{
+    font-family: "苹方-简 中粗体";
+}
+/*签约流程*/
+.swiper-container{
+    width: 100%;
+    height: 100%;
+}
+.swiper-wrapper .swiper-slide img{
+    width: 100%;
+    height: 100%;
+}
+.address{
+    padding-top: 20px;
+}
+.address p{
+    line-height: 24px;
+    height: 24px;
+
+}
+.address p span{
+    padding-left: 10px;
+}
+.address p a{
+    color: #00a0e9;
+    padding-left: 10px;
+}
+.address p  .sug{
+    padding-left: 0;
+}
+.finger{
+    display: block;
+    position: fixed;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -25px;
+    z-index: 1;
+}
+/*弹窗*/
+#hehe,#dddsss{
+    width:80%;
+    text-align:center;
+    display:none;
+    /*position: relative;top:-100px;*/
+    background-color:#fff;
+    position: relative;
+    top:50%;
+    left:10%;
+    height:150px;
+    margin-top:0px;
+    border: 1px solid #eee;-moz-border-radius: 15px;      /* Gecko browsers */
+    -webkit-border-radius: 15px;   /* Webkit browsers */
+    border-radius:15px;  }
+#hehe .s,#dddsss .s{line-height:100px;}
+#hehe a,#dddsss a{display: inline-block;border-top:1px solid #eee;width: 100%;line-height:50px;}
